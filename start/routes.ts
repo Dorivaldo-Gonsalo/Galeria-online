@@ -12,7 +12,6 @@ import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
 import User from '#models/user'
 import Gallery from '#models/gallery'
-import Image from '#models/image'
 
 
 router.on('/').render('pages/home').as('home')
