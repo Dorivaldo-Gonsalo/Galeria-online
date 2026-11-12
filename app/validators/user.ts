@@ -12,16 +12,8 @@ const password = () => vine.string().minLength(8).maxLength(32)
 export const signupValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(2).maxLength(255),
-    email: vine
-      .string()
-      .email()
-      .toLowerCase()
-      .trim()
-      .unique({ table: 'users', column: 'email' }),
-    password: vine
-      .string()
-      .minLength(8)
-      .confirmed({ confirmationField: 'passwordConfirmation' }),
+    email: email().toLowerCase().trim().unique({ table: 'users', column: 'email' }),
+    password: password().confirmed({ confirmationField: 'passwordConfirmation' }),
   })
 )
 
@@ -29,7 +21,9 @@ export const signupValidator = vine.compile(
  * Validator to use before validating user credentials
  * during login
  */
-export const loginValidator = vine.create({
-  email: email(),
-  password: vine.string(),
-})
+export const loginValidator = vine.compile(
+  vine.object({
+    email: email(),
+    password: vine.string(),
+  })
+)
