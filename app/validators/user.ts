@@ -9,12 +9,21 @@ const password = () => vine.string().minLength(8).maxLength(32)
 /**
  * Validator to use when performing self-signup
  */
-export const signupValidator = vine.create({
-  fullName: vine.string().nullable(),
-  email: email().unique({ table: 'users', column: 'email' }),
-  password: password(),
-  passwordConfirmation: password().sameAs('password'),
-})
+export const signupValidator = vine.compile(
+  vine.object({
+    name: vine.string().trim().minLength(2).maxLength(255),
+    email: vine
+      .string()
+      .email()
+      .toLowerCase()
+      .trim()
+      .unique({ table: 'users', column: 'email' }),
+    password: vine
+      .string()
+      .minLength(8)
+      .confirmed({ confirmationField: 'passwordConfirmation' }),
+  })
+)
 
 /**
  * Validator to use before validating user credentials

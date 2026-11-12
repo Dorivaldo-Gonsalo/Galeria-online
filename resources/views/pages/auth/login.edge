@@ -1,6 +1,7 @@
 @layouts.auth()
   <h1 class="auth__title">Welcome back</h1>
   <p class="auth__sub">Sign in to continue building.</p>
+
   @form({
     route: 'session.store',
     method: 'POST',
@@ -17,6 +18,7 @@
       })
       @!field.error()
     @end
+
     @field.root({ name: 'password' })
       @!field.label({ text: 'Password' })
       @!input.control({
@@ -26,6 +28,7 @@
       })
       @!field.error()
     @end
+
     @!button({
       text: 'Sign in',
       type: 'submit',
@@ -37,11 +40,7 @@
   @end
 
   <p class="auth__foot">
-    
-
     New here?
-
-
     @link({ route: 'new_account.create', class: 'il' })
       Create an account
     @end

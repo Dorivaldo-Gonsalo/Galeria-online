@@ -1,6 +1,7 @@
 @layouts.auth()
   <h1 class="auth__title">Create your account</h1>
   <p class="auth__sub">Start building with the starter kit.</p>
+
   @form({
     route: 'new_account.store',
     method: 'POST',
@@ -8,11 +9,16 @@
     'x-data': '{ submitting: false }',
     'x-on:submit': 'submitting = true',
   })
-    @field.root({ name: 'fullName' })
-      @!field.label({ text: 'Full name' })
-      @!input.control({ autocomplete: 'name', placeholder: 'Ada Lovelace' })
+    {{-- Campo alterado de fullName para name (conforme a tabela do Neon) --}}
+    @field.root({ name: 'name' })
+      @!field.label({ text: 'Name' })
+      @!input.control({
+        autocomplete: 'name',
+        placeholder: 'Ada Lovelace',
+      })
       @!field.error()
     @end
+
     @field.root({ name: 'email' })
       @!field.label({ text: 'Email' })
       @!input.control({
@@ -22,6 +28,7 @@
       })
       @!field.error()
     @end
+
     @field.root({ name: 'password' })
       @!field.label({ text: 'Password' })
       @!input.control({
@@ -31,6 +38,7 @@
       })
       @!field.error()
     @end
+
     @field.root({ name: 'passwordConfirmation' })
       @!field.label({ text: 'Confirm password' })
       @!input.control({
@@ -40,6 +48,7 @@
       })
       @!field.error()
     @end
+
     @!button({
       text: 'Create account',
       type: 'submit',
@@ -51,9 +60,7 @@
   @end
 
   <p class="auth__foot">
-    
     Already have an account?
-
     @link({ route: 'session.create', class: 'il' })
       Sign in
     @end
