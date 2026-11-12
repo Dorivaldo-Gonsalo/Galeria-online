@@ -10,6 +10,10 @@
 import { middleware } from '#start/kernel'
 import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
+import User from '#models/user'
+import Gallery from '#models/gallery'
+import Image from '#models/image'
+
 
 router.on('/').render('pages/home').as('home')
 
@@ -29,3 +33,20 @@ router
     router.post('logout', [controllers.Session, 'destroy'])
   })
   .use(middleware.auth())
+
+// Lista todos os usuários
+router.get('/users', async () => {
+  const users = await User.query().select('id', 'name', 'email', 'createdAt')
+  return users
+})
+
+// Lista todas as galerias (com o nome do dono)
+router.get('/galleries', async () => {
+  const galleries = await Gallery.query()
+    .preload('user', (query) => {
+      query.select('id', 'name', 'email')
+    })
+    .select('id', 'title', 'description', 'userId', 'createdAt')
+
+  return galleries
+});
