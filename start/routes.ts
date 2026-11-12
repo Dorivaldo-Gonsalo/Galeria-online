@@ -14,7 +14,10 @@ import User from '#models/user'
 import Gallery from '#models/gallery'
 
 
-router.on('/').render('pages/home').as('home')
+//router.on('/').render('pages/home').as('home')
+const HomeController = () => import('#controllers/home_controller')
+
+router.get('/', [HomeController, 'index']).as('home')
 
 router
   .group(() => {

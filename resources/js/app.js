@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs'
+import '../css/gallery.css'
 
 Alpine.data('alert', function () {
   return {

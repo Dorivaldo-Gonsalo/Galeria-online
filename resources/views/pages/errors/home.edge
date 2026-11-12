@@ -1,0 +1,70 @@
+@layouts.marketing()
+  <div class="home">
+    <article class="prose-card">
+
+      {{-- Estado do site (mesmo selo do kit) --}}
+      <div class="pc-top">
+        <span class="pc-status mono tag" style="color: var(--ok);">
+          <span class="dot"></span>
+          Online
+        </span>
+      </div>
+
+      {{-- Mensagem principal --}}
+      <div class="pc-lead">A sua galeria de fotos, online e só sua.</div>
+
+      <p class="pc-para">
+        Crie uma galeria, envie as suas imagens e baixe-as quando quiser, de qualquer dispositivo.
+      </p>
+
+      {{-- Como funciona: um parágrafo por passo --}}
+      @each((step, index) in steps)
+        <p class="pc-para">
+          <strong>{{ index + 1 }}. {{ step.title }}.</strong> {{ step.text }}
+        </p>
+      @end
+
+      {{-- Ações principais (ajuste os links se as rotas forem diferentes) --}}
+      <ul class="links">
+        <li>
+          <a class="lrow" href="/signup">
+            <span class="lrow__bullet"></span>
+            <span class="lrow__title">Criar minha galeria</span>
+            <span class="lrow__desc">Registo grátis</span>
+            <span class="lrow__arrow">
+              @svg('lucide:arrow-up-right', { width: 16, height: 16 })
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="lrow" href="/login">
+            <span class="lrow__bullet"></span>
+            <span class="lrow__title">Entrar</span>
+            <span class="lrow__desc">Aceda às suas fotos</span>
+            <span class="lrow__arrow">
+              @svg('lucide:arrow-up-right', { width: 16, height: 16 })
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      {{-- Exemplos de galerias: um quadrado colorido por galeria --}}
+      <div class="stack">
+        <span class="tag">Exemplos de galerias</span>
+        <div class="pile" role="list" aria-label="Exemplos de galerias">
+          @each(gallery in featuredGalleries)
+            <span
+              class="tile"
+              role="listitem"
+              title="{{ gallery.title }} ({{ gallery.photos }} fotos)"
+              style="background: hsl({{ gallery.hue }} 70% 55%); color: #fff;"
+            >
+              @svg('lucide:image', { width: 20, height: 20 })
+            </span>
+          @end
+        </div>
+      </div>
+
+    </article>
+  </div>
+@end

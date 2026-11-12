@@ -1,0 +1,74 @@
+/* =========================================================
+   Estilos da página inicial da galeria.
+   Todas as classes começam com "g-" para não colidir com o
+   CSS do kit. Fonte e cores de texto são herdadas do app.css.
+   ========================================================= */
+
+/* Variáveis: altere aqui para combinar com o visual do kit */
+.gallery-home {
+  --g-accent: #5a45ff;                                   /* cor principal */
+  --g-accent-text: #fff;                                 /* texto sobre a cor principal */
+  --g-line: color-mix(in srgb, currentColor 14%, transparent);   /* bordas */
+  --g-soft: color-mix(in srgb, currentColor 6%, transparent);    /* fundos suaves */
+  --g-muted: color-mix(in srgb, currentColor 65%, transparent);  /* texto secundário */
+  --g-radius: 0.75rem;
+
+  display: grid;
+  gap: 4rem;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+/* ---- Topo ---- */
+.g-hero { text-align: center; max-width: 42rem; margin-inline: auto; }
+.g-hero__title { font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.1; font-weight: 800; }
+.g-hero__text { margin-top: 1rem; color: var(--g-muted); font-size: 1.125rem; line-height: 1.6; }
+.g-hero__actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+
+/* Única animação da página: o topo aparece suavemente ao carregar */
+@keyframes g-rise { from { opacity: 0; transform: translateY(0.75rem); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .g-hero { animation: g-rise 0.6s ease-out both; }
+}
+
+/* ---- Botões ---- */
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.7rem 1.25rem; border-radius: var(--g-radius);
+  border: 1px solid var(--g-line); font-weight: 600; text-decoration: none; color: inherit;
+  transition: background-color 0.15s ease;
+}
+.g-btn:hover { background: var(--g-soft); }
+.g-btn--primary { background: var(--g-accent); border-color: var(--g-accent); color: var(--g-accent-text); }
+.g-btn--primary:hover { background: color-mix(in srgb, var(--g-accent) 85%, black); }
+.g-btn:focus-visible { outline: 3px solid var(--g-accent); outline-offset: 2px; }
+
+/* ---- Títulos de secção ---- */
+.g-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.25rem; }
+
+/* ---- Grelhas: 1 coluna no telemóvel, mais colunas em ecrãs maiores ---- */
+.g-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; list-style: none; padding: 0; }
+@media (min-width: 40rem) { .g-grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 48rem) { .g-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 64rem) { .g-grid--4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* ---- Cartões dos passos ---- */
+.g-card { padding: 1.25rem; border: 1px solid var(--g-line); border-radius: var(--g-radius); }
+.g-card__number {
+  display: inline-grid; place-items: center; width: 2rem; height: 2rem;
+  border-radius: 999px; background: var(--g-accent); color: var(--g-accent-text); font-weight: 700;
+}
+.g-card__title { margin-top: 0.75rem; font-weight: 700; }
+.g-card__text { margin-top: 0.25rem; color: var(--g-muted); line-height: 1.5; }
+
+/* ---- Exemplos de galerias ---- */
+.g-tile__cover {
+  aspect-ratio: 4 / 3; border-radius: var(--g-radius);
+  background: linear-gradient(135deg, hsl(var(--hue) 70% 62%), hsl(calc(var(--hue) + 40) 70% 45%));
+}
+.g-tile__title { margin-top: 0.6rem; font-weight: 700; }
+.g-tile__meta { color: var(--g-muted); font-size: 0.875rem; }
+
+/* ---- Chamada final ---- */
+.g-cta { text-align: center; padding: 2.5rem 1.25rem; border-radius: var(--g-radius); background: var(--g-soft); }
